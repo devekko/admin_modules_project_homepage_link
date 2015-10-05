@@ -1,7 +1,6 @@
 name = Admin Modules Project Homepage Link
 description = "Provides link from Admin Modules i.e. systems modules form or /admin/modules page to the project homepage on Drupal.org"
 core = 7.x
-dependencies[] = util
-dependencies[] = overlay
+dependencies[] = coder_review
 package = Administration
 configure = 'admin/config/system/admin_modules_project_homepage_link'

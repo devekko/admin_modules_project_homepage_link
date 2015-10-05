@@ -22,32 +22,30 @@ function admin_modules_project_homepage_link_help($path, $arg) {
 /**
  * Implements hook_menu().
  */
-#function admin_modules_project_homepage_link_menu() {
-#  $items = array();
+function admin_modules_project_homepage_link_menu() {
+  $items = array();
 
-#  $items['admin/modules/admin_modules_project_homepage_link'] = array(
-#    'title' => 'Admin Project Homepage Link',
-#    'type' => MENU_LOCAL_TASK,
-#    'page callback' => 'admin_modules_project_homepage_link',
-#    'access arguments' => array('administer admin_project_homepage modules '),
-#    );
-#
-#    return $items;
-#}
+  $items['admin/modules/admin_modules_project_homepage_link'] = array(
+    'title' => 'Admin Project Homepage Link',
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'admin_modules_project_homepage_link',
+    'access arguments' => array('administer admin_project_homepage modules '),
+    );
+
+    return $items;
+}
 
 /**
  * Implements hook_perm().
  */
-#function admin_modules_project_homepage_link_permission() {
-#  return array(
-#    'administer module filter' => array(
-#      'title' => t('Administer Module Filter'),
-#      'description' => t('Configure how Module Filter performs.')
-#    )
-#  );
-#}
-
-
+function admin_modules_project_homepage_link_permission() {
+  return array(
+    'administer module filter' => array(
+      'title' => t('Administer Module Filter'),
+      'description' => t('Configure how Module Filter performs.')
+    )
+  );
+}
 
 /*
  * Implements hook_form_FORM_ID_alter().
@@ -60,12 +58,12 @@ function admin_modules_project_homepage_link_form_system_modules_alter(&$form, &
       // Add an extra operation link for each module row.
       $form['modules'][$package][$module_filename]['links']['google'] = array(
         '#type' => 'link',
-        '#title' => t('Drupal.org'),
-        '#href' => "https://drupal.org/project/$module_filename",
+        '#title' => t('Search d.o'),
+        '#href' => "https://www.google.com/search?q=site%3Adrupal.org+$module_filename",
         '#options' => array(
           'attributes' => array(
             'class' => array('module-link', 'module-link-google'),
-            'title' => t('Go to google'),
+            'title' => t('Search drupal.org with Google'),
           ),
         ),
       );
@@ -74,5 +72,3 @@ function admin_modules_project_homepage_link_form_system_modules_alter(&$form, &
     }
   }
 }
-
-

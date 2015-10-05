@@ -1,0 +1,78 @@
+
+<?php
+/**
+ * @file
+ * Provides link from Admin Modules page to Project Homepage on Drupal.org.
+ * @author niccolo
+ */
+
+/**
+ * Implements hook_help().
+ */
+function admin_modules_project_homepage_link_help($path, $arg) {
+  switch ($path) {
+    // Main module help for the admin_project_homepage_link module.
+    case 'admin/help#admin_modules_project_homepage_link':
+      return '<p>'
+        . t('Provides link from Admin Modules page to Project Homepage on Drupal.org.')
+        . '</p>';
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+#function admin_modules_project_homepage_link_menu() {
+#  $items = array();
+
+#  $items['admin/modules/admin_modules_project_homepage_link'] = array(
+#    'title' => 'Admin Project Homepage Link',
+#    'type' => MENU_LOCAL_TASK,
+#    'page callback' => 'admin_modules_project_homepage_link',
+#    'access arguments' => array('administer admin_project_homepage modules '),
+#    );
+#
+#    return $items;
+#}
+
+/**
+ * Implements hook_perm().
+ */
+#function admin_modules_project_homepage_link_permission() {
+#  return array(
+#    'administer module filter' => array(
+#      'title' => t('Administer Module Filter'),
+#      'description' => t('Configure how Module Filter performs.')
+#    )
+#  );
+#}
+
+
+
+/*
+ * Implements hook_form_FORM_ID_alter().
+ */
+function admin_modules_project_homepage_link_form_system_modules_alter(&$form, &$form_state, $form_id) {
+  // Loop through the array of module packages.
+  foreach (element_children($form['modules']) as $package) {
+    // Loop through the array of module rows for each package.
+    foreach (element_children($form['modules'][$package]) as $module_filename) {
+      // Add an extra operation link for each module row.
+      $form['modules'][$package][$module_filename]['links']['google'] = array(
+        '#type' => 'link',
+        '#title' => t('Drupal.org'),
+        '#href' => "https://drupal.org/project/$module_filename",
+        '#options' => array(
+          'attributes' => array(
+            'class' => array('module-link', 'module-link-google'),
+            'title' => t('Go to google'),
+          ),
+        ),
+      );
+# TODO remove dependency on Coder Review
+#      $package['#theme'] = 'coder_review_modules_fieldset';
+    }
+  }
+}
+
+
